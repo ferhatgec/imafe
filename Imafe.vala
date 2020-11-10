@@ -53,10 +53,11 @@ public class Imafe : Object {
 	}
 
 	public void dialog_response(Dialog dialog, int response_id) {
-		switch (response_id) {
+		switch(response_id) {
 			case ResponseType.ACCEPT:
 				var filename = (dialog as FileChooserDialog).get_filename();
-				image.set_from_file (filename);
+				image.set_from_file(filename);
+				header.set_title(filename);
 				break;
 			default:
 				break;
