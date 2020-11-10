@@ -29,6 +29,8 @@ public class Imafe : Object {
 	private Box       	  box;
 	private Box       	  info_box;
 			
+	private float 		  center = 0.5f;
+	
 	public Imafe() {
 		window      = new Window();
 		header      = new HeaderBar();
@@ -43,6 +45,9 @@ public class Imafe : Object {
 		
 		resolution  = new Entry();
 		filename    = new Entry();
+		
+		filename.set_text("Idk");
+		resolution.set_text("???");
 		
 		switcher    = new StackSwitcher();
 		image_stack = new Stack();
@@ -97,6 +102,8 @@ public class Imafe : Object {
 		entry.can_focus = false;
 		entry.editable = false;	
 
+		entry.xalign = center;
+		
 		entry.halign = Align.FILL;
 		entry.valign = Align.CENTER;
 		
