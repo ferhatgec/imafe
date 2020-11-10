@@ -46,16 +46,17 @@ public class Imafe : Object {
 		
 		switcher    = new StackSwitcher();
 		image_stack = new Stack();
-			
+		
         image_stack.set_vexpand(true);
         image_stack.set_hexpand(true);
         
+        switcher.halign = Gtk.Align.CENTER;
         switcher.set_stack(image_stack);
-
+		
 		/* Set title variable of Gtk.Window. */
 		window.title = "Fegeya Imafe";
 		
-		window.set_default_size(400, 400);
+		window.set_default_size(700, 400);
 		
 		header.set_show_close_button(true);
 		header.set_title(window.title);
