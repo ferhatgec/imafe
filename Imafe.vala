@@ -18,8 +18,8 @@ public class Imafe : Object {
 	
 	private Label		  image_label;
 	
-	private Label		  filename;
-	private Label		  resolution;
+	private Entry		  filename;
+	private Entry		  resolution;
 	
 	private StackSwitcher switcher;
 	private Stack 		  image_stack;
@@ -41,14 +41,17 @@ public class Imafe : Object {
 		
 		image_label = new Label("Image");
 		
-		resolution  = new Label(null);
-		filename    = new Label(null);
+		resolution  = new Entry();
+		filename    = new Entry();
 		
 		switcher    = new StackSwitcher();
 		image_stack = new Stack();
 		
         image_stack.set_vexpand(true);
         image_stack.set_hexpand(true);
+        
+        set_info(filename);
+        set_info(resolution);
         
         switcher.halign = Gtk.Align.CENTER;
         switcher.set_stack(image_stack);
@@ -75,8 +78,8 @@ public class Imafe : Object {
 		/* Set titlebar */		
 		window.set_titlebar(header);
 		
-		info_box.pack_start(filename, true, true, 0);
-		info_box.pack_start(resolution, true, true, 1);
+		info_box.pack_start(filename, false, true, 0);
+		info_box.pack_start(resolution, false, true, 1);
 		
 		/* Add image in Gtk.Box */
 		box.pack_start(image, true, true, 0);
@@ -90,14 +93,24 @@ public class Imafe : Object {
 		window.destroy.connect(main_quit);
 	}
 
+	void set_info(Entry entry) {
+		entry.can_focus = false;
+		entry.editable = false;	
+
+		entry.halign = Align.FILL;
+		entry.valign = Align.CENTER;
+		
+		entry.margin = 20;
+	}
+	
 	public void dialog_response(Dialog dialog, int response_id) {
 		switch(response_id) {
 			case ResponseType.ACCEPT:
 				var dialog_filename = (dialog as FileChooserDialog).get_filename();
 				image.set_from_file(dialog_filename);
 				header.set_title(dialog_filename);
-				filename.set_label(dialog_filename);
-				resolution.set_label(image.pixel_size.to_string());
+				filename.set_text(dialog_filename);
+				resolution.set_text(image.pixel_size.to_string());
 				break;
 			default:
 				break;
