@@ -1,3 +1,6 @@
+<img src="resource/imafe.png" align="left"
+     alt="Fegeya Imafe logo by @ferhatgec" width="60" height="60">
+     
 # Fegeya Imafe
 ## Fegeya Imafe, Unique &amp; simple image viewer.
 
