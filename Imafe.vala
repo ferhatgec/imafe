@@ -20,6 +20,7 @@ public class Imafe : Object {
 	
 	private Entry		  filename;
 	private Entry		  resolution;
+	private Entry		  type;
 	
 	private StackSwitcher switcher;
 	private Stack 		  image_stack;
@@ -45,9 +46,11 @@ public class Imafe : Object {
 		
 		resolution  = new Entry();
 		filename    = new Entry();
+		type		= new Entry();
 		
-		filename.set_text("Idk");
-		resolution.set_text("???");
+		filename.set_text("....");
+		resolution.set_text("....");
+		type.set_text("....");
 		
 		switcher    = new StackSwitcher();
 		image_stack = new Stack();
@@ -57,6 +60,7 @@ public class Imafe : Object {
         
         set_info(filename);
         set_info(resolution);
+        set_info(type);
         
         switcher.halign = Gtk.Align.CENTER;
         switcher.set_stack(image_stack);
@@ -85,6 +89,7 @@ public class Imafe : Object {
 		
 		info_box.pack_start(filename, false, true, 0);
 		info_box.pack_start(resolution, false, true, 1);
+		info_box.pack_start(type, false, true, 2);
 		
 		/* Add image in Gtk.Box */
 		box.pack_start(image, true, true, 0);
@@ -116,8 +121,11 @@ public class Imafe : Object {
 				var dialog_filename = (dialog as FileChooserDialog).get_filename();
 				image.set_from_file(dialog_filename);
 				header.set_title(dialog_filename);
+				
 				filename.set_text("Path: " + dialog_filename);
 				resolution.set_text("Resolution: " + image.pixel_size.to_string());
+				type.set_text("Type: " + GetTypeOfFile(dialog_filename));
+				
 				break;
 			default:
 				break;
@@ -126,6 +134,17 @@ public class Imafe : Object {
 		dialog.destroy();
 	}
 
+	string GetTypeOfFile(string file) {
+		if(file.contains(".png") == true) { 
+			file = "PNG-Image";
+		} else if(file.contains(".jpg") == true) { 
+			file = "JPG-Image";
+		} else if(file.contains(".gif") == true) { 
+			file = "GIF-Image";
+		} else { file = "Regular (?)"; }
+		
+		return file;
+	}
 	
 	/* Dialog of FileChooser */
 	[CCode (instance_pos = -1)]
