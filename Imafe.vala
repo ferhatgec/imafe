@@ -31,6 +31,8 @@ public class Imafe : Object {
 	private Box       	  info_box;
 			
 	private float 		  center = 0.5f;
+	private string		  dot 	 = "....";
+	
 	
 	public Imafe() {
 		window      = new Window();
@@ -48,9 +50,9 @@ public class Imafe : Object {
 		filename    = new Entry();
 		type		= new Entry();
 		
-		filename.set_text("....");
-		resolution.set_text("....");
-		type.set_text("....");
+		filename.set_text(dot);
+		resolution.set_text(dot);
+		type.set_text(dot);
 		
 		switcher    = new StackSwitcher();
 		image_stack = new Stack();
@@ -165,7 +167,7 @@ public class Imafe : Object {
 	[CCode (instance_pos = -1)]
 	public void on_open_image (Button self) {
 		var filter = new FileFilter();
-		var dialog = new FileChooserDialog("Open image", 				/* Title */
+		var dialog = new FileChooserDialog("Open Image", 				/* Title */
 		                                    window,						
 		                                    FileChooserAction.OPEN,		
 		                                    Stock.CANCEL, ResponseType.CANCEL,
