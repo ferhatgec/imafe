@@ -116,8 +116,8 @@ public class Imafe : Object {
 				var dialog_filename = (dialog as FileChooserDialog).get_filename();
 				image.set_from_file(dialog_filename);
 				header.set_title(dialog_filename);
-				filename.set_text(dialog_filename);
-				resolution.set_text(image.pixel_size.to_string());
+				filename.set_text("Path: " + dialog_filename);
+				resolution.set_text("Resolution: " + image.pixel_size.to_string());
 				break;
 			default:
 				break;
