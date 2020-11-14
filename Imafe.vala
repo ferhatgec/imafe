@@ -58,6 +58,11 @@ public class Imafe : Object {
         image_stack.set_vexpand(true);
         image_stack.set_hexpand(true);
         
+        
+        if(IsExist("/usr/share/pixmaps/imafe/imafe_main.png") == true) {
+        	image.set_from_file("/usr/share/pixmaps/imafe/imafe_main.png");
+        }
+        
         set_info(filename);
         set_info(resolution);
         set_info(type);
@@ -146,6 +151,15 @@ public class Imafe : Object {
 		return file;
 	}
 	
+	/* From FileOperations (CodeFad & Prism) */
+	public bool IsExist(string _directory) {
+    	if (GLib.FileUtils.test(_directory, GLib.FileTest.EXISTS)) {
+			return true;
+		}
+		
+		return false;
+    }
+    
 	/* Dialog of FileChooser */
 	[CCode (instance_pos = -1)]
 	public void on_open_image (Button self) {
