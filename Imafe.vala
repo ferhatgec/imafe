@@ -70,6 +70,8 @@ public class Imafe : Object {
         switcher.halign = Gtk.Align.CENTER;
         switcher.set_stack(image_stack);
 		
+		header.pack_start(switcher);
+		
 		/* Set title variable of Gtk.Window. */
 		window.title = "Fegeya Imafe";
 		
@@ -80,7 +82,6 @@ public class Imafe : Object {
 
 		window.add(grid);
 
-		grid.attach(switcher, 0, 0, 1, 1);
 		grid.attach(image_stack, 0, 1, 1, 1);
 
 		image_stack.add_titled(box, "Image", "Image");
