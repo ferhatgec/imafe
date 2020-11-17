@@ -33,6 +33,7 @@ public class Imafe : Object {
 	private float 		  center = 0.5f;
 	private string		  dot 	 = "....";
 	
+	public static string argument = null;
 	
 	public Imafe() {
 		window      = new Window();
@@ -103,6 +104,8 @@ public class Imafe : Object {
 		box.pack_start(image, true, true, 0);
 		window.add(box);
 
+		if(argument != null) { open_image(); }
+
 		/* Show open dialog when click 'open' button. */
 		button.clicked.connect(on_open_image);
 		
@@ -123,6 +126,18 @@ public class Imafe : Object {
 		entry.margin = 20;
 	}
 	
+	public void open_image() {
+		if(argument != null) {
+			image.set_from_file(argument);
+
+			header.set_title(argument);
+				
+			filename.set_text("Path: " + argument);
+			resolution.set_text("Resolution: " + image.pixel_size.to_string());
+			type.set_text("Type: " + GetTypeOfFile(argument));	
+		}
+	}
+
 	public void dialog_response(Dialog dialog, int response_id) {
 		switch(response_id) {
 			case ResponseType.ACCEPT:
@@ -178,8 +193,11 @@ public class Imafe : Object {
 		dialog.show();
 	}
 
-	static int main (string[] args) {
+	static int main(string[] args) {
 		Gtk.init(ref args);
+
+		if(args[1] != null) { argument = args[1]; }
+  
 		var app = new Imafe();
 
 		Gtk.main();
