@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Fegeya Imafe
 Exec=imafe %U
-Icon=/usr/share/pixmaps/imafe/imafe_32.png
+Icon=/usr/share/pixmaps/imafe/imafe.png
 Type=Application
 Categories=GTK;GNOME;Viewer;ImageProcessing;
 Terminal=false
